@@ -1,9 +1,11 @@
 package _08_SolarSystem;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import game_tools.Game;
 import game_tools.GameControlScene;
@@ -51,11 +53,12 @@ import game_tools.GameControlScene;
  */
 
 public class SolarSystem implements GameControlScene {
-    static final int DISPLAY_WIDTH = 1000;
-    static final int DISPLAY_HEIGHT = DISPLAY_WIDTH;
+	Random rand = new Random();
+    static final int DISPLAY_WIDTH = 2160;
+    static final int DISPLAY_HEIGHT = 1080;
     static final int CENTER_X = DISPLAY_WIDTH / 2;
     static final int CENTER_Y = DISPLAY_HEIGHT / 2;
-    static final int SUN_RADIUS_PIXELS = (1391 / 2) / 20;
+    static final int SUN_RADIUS_PIXELS = (800 / 2) / 20;
     static final int SUN_DIAMETER_PIXELS = 2 * SUN_RADIUS_PIXELS;
     static final int MS_PER_DAY = 10;
 
@@ -66,8 +69,15 @@ public class SolarSystem implements GameControlScene {
     Long startTimeMs = null;
     Game gameFrame = new Game("Solar System");
     
-    Planet earth = new Planet(12);
+    Planet earth = new Planet(12,14960000,365,Color.BLUE,1);
     
+    Planet mer = new Planet(4,5790000,88,Color.ORANGE,0);
+    Planet ven = new Planet(12,10820000,224,Color.GRAY,0);
+    Planet mar = new Planet(6,22790000,687,Color.RED,2);
+    Planet jup = new Planet(142,77860000,4331,Color.WHITE,79);
+    Planet sat = new Planet(120,143350000,10747,Color.YELLOW,82);
+    Planet ura = new Planet(51,287250000,30589,Color.WHITE,27);
+    Planet nep = new Planet(49,449510000,59800,Color.BLUE,14);
     public SolarSystem() {
         gameFrame.setScene(this);
         gameFrame.start();
@@ -76,8 +86,20 @@ public class SolarSystem implements GameControlScene {
         /*
          * Add Earth's moon
          */
-        earth.addMoon();
+        //earth.addMoon(1,10,6388,50,rand.nextInt(365));
+        /*
+         *  int numMoons, moonDiameter, distPlanetToMoon, moonDaysToOrbit, daysOffset;
         
+        public Moon(int numMoons, int moonDiameter, int distPlanetToMoon, int moonDaysToOrbit, int daysOffset) {
+            Random rand = new Random();
+            this.moonColor = Color.WHITE;
+            this.moonDiameter = 10;
+            this.distPlanetToMoon = (diameter/2) + 10;
+            this.moonDaysToOrbit = 50;                 // arbitrarily chosen
+            this.daysOffset = rand.nextInt(365);
+        }
+        
+         */
         sunX = CENTER_X - SUN_RADIUS_PIXELS;
         sunY = CENTER_Y - SUN_RADIUS_PIXELS;
         startTimeMs = System.currentTimeMillis();
@@ -105,6 +127,7 @@ public class SolarSystem implements GameControlScene {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Times New Roman", Font.PLAIN, 32));
         g.drawString("Days: " + getDays(), 0, 50);
+        g.drawString("(Not to scale)", 0, 90);
         
         /*
          * Sun
@@ -118,6 +141,15 @@ public class SolarSystem implements GameControlScene {
          * Add planets here
          */
         earth.draw(g, numDays);
+        mer.draw(g, numDays);
+        ven.draw(g, numDays);
+        mar.draw(g, numDays);
+        sat.draw(g, numDays);
+        jup.draw(g, numDays);
+        ura.draw(g, numDays);
+        nep.draw(g, numDays);
+    //    nep.draw(g, numDays);
+    //    ura.draw(g, numDays);
     }
     
     @Override

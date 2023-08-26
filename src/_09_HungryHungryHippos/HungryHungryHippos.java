@@ -61,15 +61,18 @@ public class HungryHungryHippos implements GameScene, GameControlScene {
      * Create your hippo objects here. The "left" input parameter indicates
      * which side the hippo is drawn.
      */
-    Hippo myHippoObject = new Hippo("left");
-
+    Hippo myHippoObject = new Hippo("left","Lizzie",Color.MAGENTA);
+    Hippo hippo2 = new Hippo("up","Henry",Color.orange);
+    Hippo hippo3 = new Hippo("right","Homer",Color.green);
+    Hippo hippo4 = new Hippo("down","Harry",Color.yellow);
+    
     public HungryHungryHippos() {
         gameFrame.setScene(this);
         gameFrame.start();
         gameFrame.setSize(GAME_WIDTH, GAME_HEIGHT);
         setup();
         
-        String instructions = "Press '1' to make the hippo eat\n";
+        String instructions = "Press '1', '2', '3', or '4' to make your hippo eat\n";
         instructions += "Press 's' to start";
         JOptionPane.showMessageDialog(null, instructions);
     }
@@ -97,7 +100,10 @@ public class HungryHungryHippos implements GameScene, GameControlScene {
          * Draw all the hippos here
          */
         myHippoObject.draw(g);
-        
+        hippo2.draw(g);
+        hippo3.draw(g);
+        hippo4.draw(g);
+
         if (startGame) {
             /*
              * Move all the melons
@@ -110,6 +116,9 @@ public class HungryHungryHippos implements GameScene, GameControlScene {
              * this for all of your hippos!
              */
             checkHippoEating(myHippoObject);
+            checkHippoEating(hippo2);
+            checkHippoEating(hippo3);
+            checkHippoEating(hippo4);
         }
     }
 
@@ -125,11 +134,11 @@ public class HungryHungryHippos implements GameScene, GameControlScene {
         } else if (keyCode == KeyEvent.VK_1) {
             myHippoObject.eat();
         } else if (keyCode == KeyEvent.VK_2) {
-            
+            hippo2.eat();
         } else if (keyCode == KeyEvent.VK_3) {
-            
+        	hippo3.eat();
         } else if (keyCode == KeyEvent.VK_4) {
-            
+        	hippo4.eat();
         }
     }
     
